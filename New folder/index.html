@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="fa"> <!-- 'fa' for Persian -->
+  <head>
+    <meta charset="UTF-8" />
+    <!-- 
+      This meta tag ensures the page is scaled to the device's width, 
+      crucial for mobile responsiveness 
+    -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>مرکز انواع باتری آقاخانی</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Header/Toolbar -->
+    <header>
+      <nav class="top-toolbar">
+        <ul>
+          <li><a href="#products">محصولات</a></li>
+          <li><a href="#contact">ارتباط با ما</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero / Background Section -->
+    <section class="hero">
+      <img src="images/hero-bg.jpg" alt="Background" />
+      <!-- No text, just the background image in CSS -->
+    </section>
+
+    <!-- Products Section -->
+    <!-- Products Section -->
+    <section id="products" class="products-section">
+      <!-- Products Header Row -->
+      <div class="products-header">
+        <h2>محصولات</h2>
+      </div>
+
+      <!-- Box for filter and sort controls -->
+      <div class="filters-row">
+        <button class="filter-button">فیلتر</button>
+        <select id="brand-filter">
+            <option value="all">همه</option>
+            <option value="brandA">برند A</option>
+            <option value="brandB">برند B</option>
+        </select>
+  
+        <div class="sort-container">
+          <label for="sort-select">مرتب سازی</label>
+          <select id="sort-select">
+            <option value="price">قیمت</option>
+            <option value="capacity">ظرفیت (AH)</option>
+          </select>
+        </div>
+      </div>
+    
+      <!-- Product Grid (cards) -->
+      <div class="product-grid">
+        <!-- Example card -->
+        <div class="product-card">
+          <img src="images/product1.jpg" alt="محصول 1" />
+          <h3>باتری مدل 1</h3>
+          <p>قیمت: 1,000,000 ریال</p>
+          <p>ظرفیت: 60 AH</p>
+          <p>برند: برند A</p>
+        </div>
+        <!-- More product cards... -->
+        <div class="product-card">
+            <img src="images/product2.jpg" alt="محصول 2" />
+            <h3>باتری مدل 2</h3>
+            <p>قیمت: 2,000,000 ریال</p>
+            <p>ظرفیت: 30 AH</p>
+            <p>برند: برند B</p>
+        </div>
+        <div class="product-card">
+            <img src="images/product3.jpg" alt="محصول 3" />
+            <h3>باتری مدل 2</h3>
+            <p>قیمت: 2,000,000 ریال</p>
+            <p>ظرفیت: 30 AH</p>
+            <p>برند: برند B</p>
+        </div>
+        <div class="product-card">
+            <img src="images/product4.jpg" alt="محصول 3" />
+            <h3>باتری مدل 2</h3>
+            <p>قیمت: 2,000,000 ریال</p>
+            <p>ظرفیت: 30 AH</p>
+            <p>برند: برند B</p>
+        </div>          
+      </div>
+    </section>
+  
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+      <h2>ارتباط با ما</h2>
+      <p>اینجا اطلاعات تماس یا فرم تماس خواهد بود</p>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,179 @@
+/* 1. Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  /* 2. Body & RTL Setup */
+  body {
+    font-family: sans-serif;
+    line-height: 1.5;
+    background-color: #f3f3f3;
+    direction: rtl; /* Remove if you don't want full RTL layout */
+  }
+  
+  /* 3. Top Toolbar */
+  .top-toolbar {
+    background-color: #444;
+    padding: 1rem;
+    text-align: right; /* Align toolbar items to the right */
+  }
+  
+  .top-toolbar ul {
+    list-style: none;
+  }
+  
+  .top-toolbar li {
+    display: inline-block;
+    margin-left: 1.5rem; /* In RTL, this becomes space to the right visually */
+  }
+  
+  .top-toolbar a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  /* 4. Hero Section (Method 2: using <img> in HTML) */
+  .hero {
+    width: 100%;
+    overflow: hidden; /* Ensures no horizontal scroll if the image is large */
+    text-align: center; /* Center the image if needed */
+  }
+  
+  .hero img {
+    width: 100%;
+    height: auto; /* Maintains aspect ratio */
+    display: block;
+    /* 
+      In RTL, no special changes needed. 
+      This ensures the image is fully responsive.
+    */
+  }
+  
+  /* Products Section Wrapper (unchanged) */
+.products-section {
+    padding: 2rem;
+    background-color: #fff;
+  }
+  
+  /* Box for the heading (محصولات) */
+  .products-header {
+    background-color: #f9f9f9; /* Light background */
+    border: 1px solid #ddd;    /* Optional border */
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    text-align: right;         /* In RTL, this places the heading on the right */
+  }
+  
+  .products-header h2 {
+    margin: 0;
+    font-size: 1.5rem;
+  }
+  
+  /* Box for filter and sort controls */
+  .filters-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start; /* Push items to the right side */
+    align-items: center;
+    gap: 1rem;
+    background-color: #f9f9f9; /* Light background to match header box */
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  /* Filter button */
+  .filter-button {
+    background-color: transparent; /* Example green color */
+    color: #000;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Sort container (مرتب سازی label + dropdown) */
+  .sort-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  /* Grid for product cards (unchanged) */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(250px, 1fr));
+    gap: 1rem;
+  }
+  
+  /* Product card styling (unchanged) */
+  .product-card {
+    background-color: #fff;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .product-card:hover {
+    transform: scale(1.02);
+  }
+  
+  .product-card img {
+    /* max-width: 100%;
+    height: auto;
+    margin-bottom: 0.5rem; */
+    width: 100%;
+    height: 280px; /* or any fixed height */
+    object-fit: cover; /* or "contain" depending on your preference */
+    display: block;
+  }
+  
+  .product-card h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .product-card p {
+    margin: 0.3rem 0;
+    font-size: 1rem;
+  }
+  
+  /* 11. Contact Section */
+  .contact-section {
+    padding: 2rem;
+    background-color: #ddd;
+    /* text-align: right; 
+       Not strictly necessary if body has direction: rtl 
+       But you can add if you want to force alignment.
+    */
+  }
+  
+  /* 12. Media Queries for Responsiveness */
+  @media (max-width: 768px) {
+    /* Stack toolbar items vertically on smaller screens, if desired */
+    .top-toolbar ul {
+      text-align: center;
+    }
+    .top-toolbar li {
+      display: block;
+      margin-left: 0;
+      margin-bottom: 0.5rem;
+    }
+  
+    /* Adjust hero image height or additional styles for mobile */
+    .hero img {
+      /* The image is already 100% width, so it should scale down nicely */
+    }
+  
+    /* Product header might already be flexible, but you can tweak if needed */
+    .products-header {
+      flex-direction: column;
+      align-items: flex-end; /* or flex-start if you want them left in RTL */
+    }
+  }
+  

@@ -1,0 +1,45 @@
+/* The container with the angled red background */
+.angled-bar {
+  /* Fill with brand color */
+  background-color: #d40000;
+
+  /* Height is flexible, adjust as needed */
+  height: 70px;
+  position: relative;
+
+  /*
+    Clip-path polygon coordinates:
+    - (0 0) Top-left corner
+    - (80% 0) About 80% across the top
+    - (90% 100%) A point slightly inset on the bottom
+    - (0% 100%) Bottom-left corner
+    Tweak these percentages for a different slope/shape
+  */
+  clip-path: polygon(0 0, 80% 0, 90% 100%, 0% 100%);
+}
+/* Inside the angled bar, you can position your nav links */
+.nav-inside-clip {
+  /* Optional: add some margin or padding */
+  padding: 0 20px;
+  /* Make text items align vertically center if desired */
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* Example nav list styling (adjust to your liking) */
+.nav-list {
+  display: flex;
+  gap: 15px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-item {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+}
+.nav-item:hover {
+  text-decoration: underline;
+}

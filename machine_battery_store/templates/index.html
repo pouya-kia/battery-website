@@ -1,51 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Machine Battery Store</title>
+<head>
+  <meta charset="UTF-8" />
+  <title>Battery Center</title>
+  <!-- Link to external CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Toolbar -->
+  <nav>
+    <div class="logo">Battery Center</div>
+    <ul>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-    <!-- Basic Bootstrap (Optional) -->
-    <!-- If you want to use Bootstrap, uncomment the next line -->
-    <!-- <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    /> -->
+  <!-- Hero / Background Section -->
+  <div class="hero">
+    <h1>Welcome to Mr. AghaKhani’s Battery Center</h1>
+  </div>
 
-    <!-- Alternatively, you can link your own CSS (if any) from /static/css/ -->
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> -->
-  </head>
-  <body>
-    <header>
-      <h1 style="text-align: center;">Welcome to Our Battery Store</h1>
-    </header>
+  <!-- Products Section -->
+  <section id="products" class="products-section">
+    <div class="filters-and-sorts">
+      <!-- Filter by Brand -->
+      <label for="brandFilter">Filter by Brand:</label>
+      <select id="brandFilter">
+        <option value="">All Brands</option>
+      </select>
 
-    <!-- Example of a hero section with an image -->
-    <!-- Replace 'battery1.jpg' with your actual image name and path in /static/images/ -->
-    <section style="text-align: center; margin: 20px;">
-      <img
-        src="{{ url_for('static', filename='images/battery1.jpg') }}"
-        alt="Battery Hero Image"
-        style="max-width: 600px; width: 100%; height: auto;"
-      />
-      <p style="margin-top: 15px;">
-        The best machine batteries available here.
-      </p>
-    </section>
+      <!-- Sort Options -->
+      <label for="sortOption">Sort by:</label>
+      <select id="sortOption">
+        <option value="price">Price</option>
+        <option value="capacity">Capacity AH</option>
+      </select>
 
-    <!-- More content can go here -->
-    <section style="text-align: center;">
-      <h2>Why Choose Our Batteries?</h2>
-      <p>Our batteries are durable, reliable, and long-lasting, perfect for all heavy-duty applications.</p>
-      <p>Order now and enjoy top-quality machine batteries at unbeatable prices.</p>
-    </section>
+      <button id="applyBtn">Apply</button>
+    </div>
+    <div id="productsGrid" class="products-grid">
+      <!-- Product cards will be injected here -->
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer style="text-align: center; margin-top: 20px;">
-      <hr />
-      <p>&copy; 2025 Machine Battery Store</p>
-    </footer>
+  <!-- Contact Section -->
+  <section id="contact" class="contact-section">
+    <h2>Contact Us</h2>
+    <p>Phone: +XX-XXXX-XXXX</p>
+    <p>Address: 123 Battery Street</p>
+    <p>Email: info@batterycenter.com</p>
+  </section>
 
-    <!-- If you use Bootstrap JS, you can uncomment below -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
-  </body>
+  <!-- Link to the compiled JavaScript (transpiled from TypeScript) -->
+  <script src="index.js"></script>
+</body>
 </html>
