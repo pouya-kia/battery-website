@@ -1,195 +1,209 @@
 /* 1. Basic Reset */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* 2. Body & RTL Setup */
-  body {
-    font-family: sans-serif;
-    line-height: 1.5;
-    background-color: #f3f3f3;
-    direction: rtl; /* RTL for Persian */
-  }
-  
-  /* 3. Top Toolbar */
-  .top-toolbar {
-    background-color: #444;
-    padding: 1rem;
-    text-align: right;
-  }
-  .top-toolbar ul {
-    list-style: none;
-  }
-  .top-toolbar li {
-    display: inline-block;
-    margin-left: 1.5rem; /* In RTL, spacing to the right */
-  }
-  .top-toolbar a {
-    color: #ffffff;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  /* 4. Hero Section */
-  .hero {
-    width: 100%;
-    overflow: hidden;
-    text-align: center;
-  }
-  .hero img {
-    width: 100%;
-    height: auto;
-    display: block;
-  }
-  
-  /* 5. Products Section Wrapper */
-  .products-section {
-    padding: 2rem;
-    background-color: #fff;
-  }
-  
-  /* Container for main content + sidebar */
-  .products-page-container {
-    display: flex;
-    flex-direction: row; /* In RTL, the first child appears on the right */
-    gap: 1rem;
-    padding: 1rem 0;
-  }
-  
-  /* 6. Filters Sidebar (Right Side) */
-  .filters-sidebar {
-    width: 240px;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 1rem;
-  }
-  .filters-sidebar h2 {
-    margin-bottom: 1rem;
-  }
-  .filter-group {
-    margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-  }
-  .filter-group label {
-    margin-bottom: 0.25rem;
-  }
-  
-  /* 7. Main Content (Left Side) */
-  .main-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* 8. Products Header */
-  .products-header {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 0.5rem;
-    margin-bottom: 1rem;
-    text-align: right;
-  }
-  .products-header h2 {
-    font-size: 1.5rem;
-  }
-  
-  /* 9. Sorting Row */
-  .sort-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* Pushes sort label and options apart */
-    background-color: #f9f9f9;
-    padding: 0.5rem 1rem;
-    border: 1px solid #ddd;
-    margin-bottom: 1rem;
-  }
-  .sort-label {
-    font-weight: 600;
-    color: #000;
-  }
-  .sort-options {
-    display: flex;
-    gap: 1rem;
-    list-style: none;
-  }
-  .sort-options li a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: color 0.2s;
-  }
-  .sort-options li a:hover {
-    color: #e63946;
-  }
-  
-  /* 10. Product Grid (4 Columns) */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 2. Body & RTL Setup */
+body {
+  font-family: sans-serif;
+  line-height: 1.5;
+  background-color: #f3f3f3;
+  direction: rtl; /* مناسب زبان فارسی */
+}
+
+/* 3. Top Toolbar */
+.top-toolbar {
+  background-color: #444;
+  padding: 1rem;
+  text-align: right;
+}
+.top-toolbar ul {
+  list-style: none;
+}
+.top-toolbar li {
+  display: inline-block;
+  margin-left: 1.5rem;
+}
+.top-toolbar a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+.top-toolbar a:hover {
+  color: #ddd;
+}
+
+/* 4. Hero Section */
+.hero {
+  width: 100%;
+  max-width: 1200px;  /* حداکثر عرض برای مرکز بودن */
+  margin: 0 auto;     
+  overflow: hidden;
+  text-align: center;
+  padding: 1rem 0;
+}
+.hero img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* 5. Products Section Wrapper */
+.products-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #fff;
+}
+
+/* Container for main content + sidebar */
+.products-page-container {
+  display: flex;
+  flex-direction: row; /* RTL */
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+/* 6. Filters Sidebar */
+.filters-sidebar {
+  width: 240px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 1rem;
+}
+.filters-sidebar h2 {
+  margin-bottom: 1rem;
+}
+.filter-group {
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.filter-group label {
+  margin-bottom: 0.25rem;
+}
+
+/* 7. Main Content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 8. Products Header */
+.products-header {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  text-align: right;
+}
+.products-header h2 {
+  font-size: 1.5rem;
+}
+
+/* 9. Sorting Row */
+.sort-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #f9f9f9;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ddd;
+  margin-bottom: 1rem;
+}
+.sort-label {
+  font-weight: 600;
+  color: #000;
+}
+.sort-options {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+}
+.sort-options li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.sort-options li a:hover {
+  color: #e63946;
+}
+
+/* 10. Product Grid */
+.product-grid {
+  display: grid;
+  /* پیش‌فرض 4 ستون */
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+.product-card {
+  background-color: #fff;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+  transition: transform 0.2s ease-in-out;
+}
+.product-card:hover {
+  transform: scale(1.02);
+}
+.product-card img {
+  width: 100%;
+  height: auto; 
+  object-fit: cover;
+  display: block;
+}
+.product-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.product-card p {
+  margin: 0.3rem 0;
+  font-size: 1rem;
+}
+
+/* 11. Contact Section */
+.contact-section {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #ddd;
+}
+
+/* 12. Media Queries */
+
+/* حداکثر عرض 1200px: 3 ستونه */
+@media (max-width: 1200px) {
   .product-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(250px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(3, 1fr);
   }
-  .product-card {
-    background-color: #fff;
-    padding: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    text-align: center;
-    transition: transform 0.2s ease-in-out;
+}
+
+/* حداکثر عرض 992px: 2 ستونه */
+@media (max-width: 992px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .product-card:hover {
-    transform: scale(1.02);
+}
+
+/* حداکثر عرض 768px: تک‌ستونه + سایدبار بالا */
+@media (max-width: 768px) {
+  .products-page-container {
+    flex-direction: column;
   }
-  .product-card img {
+  .filters-sidebar {
     width: 100%;
-    height: 280px; /* Fixed height for alignment */
-    object-fit: cover;
-    display: block;
+    margin-bottom: 1rem;
   }
-  .product-card h3 {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
+  .product-grid {
+    grid-template-columns: 1fr;
   }
-  .product-card p {
-    margin: 0.3rem 0;
-    font-size: 1rem;
-  }
-  
-  /* 11. Contact Section */
-  .contact-section {
-    padding: 2rem;
-    background-color: #ddd;
-  }
-  
-  /* 12. Media Queries for Responsiveness */
-  
-  /* Up to 992px: 3 columns */
-  @media (max-width: 992px) {
-    .product-grid {
-      grid-template-columns: repeat(3, minmax(250px, 1fr));
-    }
-  }
-  
-  /* Up to 768px: Stack sidebar and reduce grid to 2 columns */
-  @media (max-width: 768px) {
-    .products-page-container {
-      flex-direction: column;
-    }
-    .filters-sidebar {
-      width: 100%;
-      margin-bottom: 1rem;
-    }
-    .product-grid {
-      grid-template-columns: repeat(2, minmax(250px, 1fr));
-    }
-  }
-  
-  /* Up to 480px: Single column */
-  @media (max-width: 480px) {
-    .product-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-  
+}

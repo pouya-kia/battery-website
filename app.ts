@@ -1,171 +1,184 @@
-/****************************************************
+/********************************************************************
  * app.ts
- * Strictly typed TypeScript for brand/price filtering
- * and sorting. We do not skip any lines here.
- ****************************************************/
+ * توضیحات مهم:
+ *  - یک آرایه از محصولات داریم (productsData).
+ *  - با تغییر Select برند یا اسلایدر قیمت، تابع applyFiltersAndRender() صدا می‌شود
+ *    و محصولات مطابق فیلتر دوباره نشان داده می‌شوند.
+ *  - با کلیک روی لینک‌های مرتب‌سازی نیز همین تابع صدا می‌شود.
+ *  - تابع renderProducts() مسئول ساخت کارت محصولات در DOM است.
+ *  - برای استفاده در مرورگر باید این فایل را با tsc کامپایل کرده و خروجی را
+ *    به صورت app.js در کنار index.html قرار دهید.
+ ********************************************************************/
 
-/**
- * 1. تعریف اینترفیس Product
- *    تضمین می‌کند که هر محصول دارای فیلدهای لازم با تایپ‌های مشخص است.
- */
+// تعریف یک نوع تایپ‌اسکریپتی برای محصول
 interface Product {
   id: number;
   title: string;
-  price: number;     // قیمت به ریال
-  capacity: number;  // ظرفیت به AH
-  brand: string;
-  imageUrl: string;
+  price: number;     // قیمت
+  capacity: number;  // مثلاً آمپرساعت باتری
+  brand: string;     // برند
+  imageUrl: string;  // مسیر تصویر
 }
 
-/**
- * 2. داده‌های نمونه محصولات.
- *    در برنامه‌های واقعی ممکن است از API داده‌ها را دریافت کنید.
- */
+// آرایه ثابت محصولات به‌عنوان نمونه
 const productsData: Product[] = [
   {
     id: 1,
     title: "باتری مدل 1",
     price: 1000000,
     capacity: 60,
-    brand: "برند A",
-    imageUrl: "images/product1.jpg",
+    brand: "brandA",
+    imageUrl: "images/product1.jpg"
   },
   {
     id: 2,
     title: "باتری مدل 2",
     price: 2000000,
     capacity: 30,
-    brand: "برند B",
-    imageUrl: "images/product2.jpg",
+    brand: "brandB",
+    imageUrl: "images/product2.jpg"
   },
   {
     id: 3,
     title: "باتری مدل 3",
     price: 2500000,
     capacity: 45,
-    brand: "برند B",
-    imageUrl: "images/product3.jpg",
+    brand: "brandB",
+    imageUrl: "images/product3.jpg"
   },
   {
     id: 4,
     title: "باتری مدل 4",
     price: 3000000,
     capacity: 50,
-    brand: "برند A",
-    imageUrl: "images/product4.jpg",
-  },
-  // محصولات بیشتر در صورت نیاز
+    brand: "brandA",
+    imageUrl: "images/product4.jpg"
+  }
+  // در صورت نیاز محصولات بیشتری اضافه کنید
 ];
 
-/**
- * 3. گرفتن المان‌های DOM مورد نیاز:
- *    - brandFilterSelect: منوی انتخاب برند
- *    - priceRangeInput: اسلایدر قیمت
- *    - priceValueSpan: عنصری برای نمایش مقدار اسلایدر
- *    - productGrid: محلی که کارت‌های محصولات رندر می‌شوند
- *    - sortLinks: هر لینک مرتب‌سازی داخل لیست مرتب‌سازی
- */
-const brandFilterSelect = document.querySelector<HTMLSelectElement>("#brand-filter");
-const priceRangeInput = document.querySelector<HTMLInputElement>("#price-range");
-const priceValueSpan = document.querySelector<HTMLSpanElement>("#price-value");
-const productGrid = document.querySelector<HTMLDivElement>(".product-grid");
-const sortLinks = document.querySelectorAll<HTMLAnchorElement>(".sort-options li a");
+// متغیرهایی برای نگهداری مقدار فیلتر و مرتب‌سازی
+let currentBrandFilter: string = "all";
+let currentMaxPrice: number = 0;
+let currentSortType: string = "";
 
 /**
- * 4. متغیر برای نگهداری گزینه مرتب‌سازی انتخاب شده.
- *    این مقدار می‌تواند "asc"، "desc"، "new"، "bestseller"، "discount" و ... باشد.
- *    در ابتدا هیچ مرتب‌سازی اعمال نمی‌شود.
+ * تابعی برای رندر کردن آرایه محصولات در .product-grid
+ * @param products آرایه محصولاتی که باید نمایش داده شوند
  */
-let chosenSortOption: string = "";
-
-/**
- * 5. تابع renderProducts
- *    لیستی از محصولات (آرایه‌ای از Product) را گرفته و درون container مربوطه رندر می‌کند.
- */
-function renderProducts(productList: Product[]): void {
+function renderProducts(products: Product[]): void {
+  const productGrid: HTMLElement | null = document.querySelector(".product-grid");
   if (!productGrid) return;
-  // پاک کردن محتوای قبلی
+
+  // ابتدا محتوای قبلی را پاک می‌کنیم
   productGrid.innerHTML = "";
-  // ایجاد کارت برای هر محصول
-  productList.forEach((product) => {
-    const card = document.createElement("div");
-    card.className = "product-card";
-    card.innerHTML = `
+
+  // هر محصول را به شکل یک کارت ایجاد و اضافه می‌کنیم
+  products.forEach((product) => {
+    const cardDiv: HTMLDivElement = document.createElement("div");
+    cardDiv.className = "product-card";
+
+    // محتوای HTML داخل کارت
+    cardDiv.innerHTML = `
       <img src="${product.imageUrl}" alt="${product.title}" />
       <h3>${product.title}</h3>
-      <p>قیمت: ${product.price.toLocaleString("fa-IR")} ریال</p>
+      <p>قیمت: ${product.price.toLocaleString()} ریال</p>
       <p>ظرفیت: ${product.capacity} AH</p>
       <p>برند: ${product.brand}</p>
     `;
-    productGrid.appendChild(card);
+
+    // در نهایت کارت را به grid اضافه می‌کنیم
+    productGrid.appendChild(cardDiv);
   });
 }
 
 /**
- * 6. تابع applyFiltersAndSort
- *    اعمال فیلترهای برند و قیمت و همچنین مرتب‌سازی انتخاب شده را بر روی آرایه محصولات انجام می‌دهد
- *    و سپس محصولات فیلتر شده را رندر می‌کند.
+ * تابعی که بر اساس فیلترها (برند، قیمت) و مرتب‌سازی
+ * محصولات را فیلتر، مرتب و سپس رندر می‌کند.
  */
-function applyFiltersAndSort(): void {
-  let filteredProducts = [...productsData];
+function applyFiltersAndRender(): void {
+  let filteredProducts = [...productsData]; // کپی از محصولات
 
-  // 6a. فیلتر بر اساس برند
-  if (brandFilterSelect && brandFilterSelect.value !== "all") {
-    filteredProducts = filteredProducts.filter((p) => p.brand === brandFilterSelect.value);
+  // 1) فیلتر برند (brand)
+  if (currentBrandFilter !== "all") {
+    filteredProducts = filteredProducts.filter(
+      (p) => p.brand === currentBrandFilter
+    );
   }
 
-  // 6b. فیلتر بر اساس محدوده قیمت
-  if (priceRangeInput) {
-    const maxPrice = parseInt(priceRangeInput.value, 10) || 10000000;
-    filteredProducts = filteredProducts.filter((p) => p.price <= maxPrice);
+  // 2) فیلتر قیمت
+  if (currentMaxPrice > 0) {
+    filteredProducts = filteredProducts.filter(
+      (p) => p.price <= currentMaxPrice
+    );
   }
 
-  // 6c. مرتب‌سازی بر اساس گزینه انتخاب شده
-  if (chosenSortOption === "asc") {
+  // 3) مرتب‌سازی
+  if (currentSortType === "asc") {
     filteredProducts.sort((a, b) => a.price - b.price);
-  } else if (chosenSortOption === "desc") {
+  } else if (currentSortType === "desc") {
     filteredProducts.sort((a, b) => b.price - a.price);
-  } else if (chosenSortOption === "new") {
+  } else if (currentSortType === "new") {
+    // مرتب‌سازی ساده فرضی بر اساس شناسه (id)
     filteredProducts.sort((a, b) => b.id - a.id);
-  } else if (chosenSortOption === "bestseller") {
-    // "پر فروش ترین": نیاز به فیلد یا منطق فروش واقعی دارد.
-    // در حال حاضر هیچ عملی انجام نمی‌دهیم.
-  } else if (chosenSortOption === "discount") {
-    // "تخفیف دار": به عنوان مثال، محصولات با قیمت کمتر از 2,000,000 ریال.
-    filteredProducts = filteredProducts.filter((p) => p.price < 2000000);
+  } else if (currentSortType === "bestseller") {
+    // اینجا می‌توانید منطق پر فروش‌ترین‌ها را بگذارید
+    // در حال حاضر صرفاً هیچ تغییری نمی‌دهیم
+  } else if (currentSortType === "discount") {
+    // اگر محصولات تخفیف‌دار داشتید اینجا مرتب کنید
+    // فعلاً placeholder
   }
 
-  // 6d. رندر محصولات به‌روز شده
+  // 4) رندر نهایی
   renderProducts(filteredProducts);
 }
 
 /**
- * 7. تنظیم Event Listener ها
+ * آماده‌سازی DOM
  */
+window.addEventListener("DOMContentLoaded", () => {
+  const brandFilterSelect: HTMLSelectElement | null = document.querySelector("#brand-filter");
+  const priceRangeInput: HTMLInputElement | null = document.querySelector("#price-range");
+  const priceValueSpan: HTMLElement | null = document.querySelector("#price-value");
+  const productGrid: HTMLElement | null = document.querySelector(".product-grid");
+  const sortLinks: NodeListOf<HTMLAnchorElement> = document.querySelectorAll(".sort-options li a");
 
-// وقتی که منوی برند تغییر می‌کند
-brandFilterSelect?.addEventListener("change", () => {
-  applyFiltersAndSort();
-});
+  // مقدار پیش‌فرض: maxPrice = 0 یعنی بدون محدودیت
+  currentMaxPrice = 0;
 
-// وقتی که اسلایدر قیمت تغییر می‌کند، هم مقدار نمایش داده می‌شود و هم فیلتر اعمال می‌شود
-priceRangeInput?.addEventListener("input", () => {
-  if (priceValueSpan && priceRangeInput) {
-    priceValueSpan.textContent = parseInt(priceRangeInput.value, 10).toLocaleString("fa-IR");
+  // رندر اولیه محصولات (بدون فیلتر)
+  renderProducts(productsData);
+
+  // رویداد تغییر برند
+  if (brandFilterSelect) {
+    brandFilterSelect.addEventListener("change", () => {
+      currentBrandFilter = brandFilterSelect.value;
+      applyFiltersAndRender();
+    });
   }
-  applyFiltersAndSort();
-});
 
-// وقتی که یکی از گزینه‌های مرتب‌سازی کلیک می‌شود
-sortLinks.forEach((link) => {
-  link.addEventListener("click", (event) => {
-    event.preventDefault();
-    chosenSortOption = link.getAttribute("data-sort") || "";
-    applyFiltersAndSort();
+  // رویداد تغییر قیمت
+  if (priceRangeInput && priceValueSpan) {
+    // هنگام بارگذاری مقدار شروع را 0 نمایش می‌دهیم
+    priceValueSpan.textContent = priceRangeInput.value;
+
+    priceRangeInput.addEventListener("input", () => {
+      // بروزرسانی محدوده قیمت در UI
+      priceValueSpan.textContent = priceRangeInput.value;
+      // تبدیل مقدار string به number
+      currentMaxPrice = Number(priceRangeInput.value);
+      applyFiltersAndRender();
+    });
+  }
+
+  // مرتب‌سازی بر اساس لینک‌های موجود
+  sortLinks.forEach((link) => {
+    link.addEventListener("click", (e: MouseEvent) => {
+      e.preventDefault();
+      const targetLink = e.currentTarget as HTMLAnchorElement;
+      // نوع مرتب‌سازی
+      currentSortType = targetLink.dataset.sort || "";
+      applyFiltersAndRender();
+    });
   });
 });
-
-/**
- * 8. رندر اولیه محصولات در هنگام بارگذاری صفحه
- */
-renderProducts(productsData);

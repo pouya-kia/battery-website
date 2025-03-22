@@ -2,9 +2,10 @@
 <html lang="fa">
   <head>
     <meta charset="UTF-8" />
-    <!-- Responsive Meta Tag -->
+    <!-- ضروری برای واکنش‌گرایی در موبایل -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>مرکز انواع باتری آقاخانی</title>
+    <!-- لینک به فایل استایل -->
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
@@ -20,7 +21,7 @@
 
     <!-- Hero / Background Section -->
     <section class="hero">
-      <img src="images/hero-bg.jpg" alt="تصویر پس‌زمینه" />
+      <img src="images/hero-bg.jpg" alt="تصویر پس‌زمینه فروشگاه باتری" />
     </section>
 
     <!-- Main Products Section -->
@@ -38,11 +39,12 @@
               <option value="brandB">برند B</option>
             </select>
           </div>
+
           <!-- Filter Group: Price Range -->
           <div class="filter-group">
             <label for="price-range">بازه قیمت</label>
             <input type="range" id="price-range" min="0" max="10000000" />
-            <span id="price-value">0</span> <!-- این عنصر مقدار انتخاب شده را نمایش می‌دهد -->
+            <span id="price-value">0</span>
           </div>
         </aside>
 
@@ -65,40 +67,10 @@
             </ul>
           </div>
 
-          <!-- Product Grid (4 columns on desktop) -->
+          <!-- Product Grid -->
           <div class="product-grid">
-            <!-- Product Card 1 -->
-            <div class="product-card">
-              <img src="images/product1.jpg" alt="محصول 1" />
-              <h3>باتری مدل 1</h3>
-              <p>قیمت: 1,000,000 ریال</p>
-              <p>ظرفیت: 60 AH</p>
-              <p>برند: برند A</p>
-            </div>
-            <!-- Product Card 2 -->
-            <div class="product-card">
-              <img src="images/product2.jpg" alt="محصول 2" />
-              <h3>باتری مدل 2</h3>
-              <p>قیمت: 2,000,000 ریال</p>
-              <p>ظرفیت: 30 AH</p>
-              <p>برند: برند B</p>
-            </div>
-            <!-- Product Card 3 -->
-            <div class="product-card">
-              <img src="images/product3.jpg" alt="محصول 3" />
-              <h3>باتری مدل 3</h3>
-              <p>قیمت: 2,500,000 ریال</p>
-              <p>ظرفیت: 45 AH</p>
-              <p>برند: برند B</p>
-            </div>
-            <!-- Product Card 4 -->
-            <div class="product-card">
-              <img src="images/product4.jpg" alt="محصول 4" />
-              <h3>باتری مدل 4</h3>
-              <p>قیمت: 3,000,000 ریال</p>
-              <p>ظرفیت: 50 AH</p>
-              <p>برند: برند A</p>
-            </div>
+            <!-- این بخش در ابتدای بارگذاری پر می‌شود
+                 یا هنگام تغییر فیلتر/مرتب‌سازی با کد جاوااسکریپت به‌روزرسانی می‌گردد -->
           </div>
         </div>
       </div>
@@ -109,7 +81,8 @@
       <h2>ارتباط با ما</h2>
       <p>اینجا اطلاعات تماس یا فرم تماس خواهد بود</p>
     </section>
-    <!-- Place the script at the bottom so the DOM is loaded first -->
+
+    <!-- اسکریپت اصلی -->
     <script src="app.js"></script>
   </body>
 </html>
