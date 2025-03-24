@@ -28,7 +28,7 @@ const productsData: Product[] = [
     price: 1000000,
     capacity: 60,
     brand: "brandA",
-    imageUrl: "images/product1.jpg"
+    imageUrl: "/images-compressed/product1.jpg"
   },
   {
     id: 2,
@@ -36,7 +36,7 @@ const productsData: Product[] = [
     price: 2000000,
     capacity: 30,
     brand: "brandB",
-    imageUrl: "images/product2.jpg"
+    imageUrl: "/images-compressed/product2.jpg"
   },
   {
     id: 3,
@@ -44,7 +44,7 @@ const productsData: Product[] = [
     price: 2500000,
     capacity: 45,
     brand: "brandB",
-    imageUrl: "images/product3.jpg"
+    imageUrl: "/images-compressed/product3.jpg"
   },
   {
     id: 4,
@@ -52,7 +52,7 @@ const productsData: Product[] = [
     price: 3000000,
     capacity: 50,
     brand: "brandA",
-    imageUrl: "images/product4.jpg"
+    imageUrl: "/images-compressed/product4.jpg"
   }
   // در صورت نیاز محصولات بیشتری اضافه کنید
 ];
